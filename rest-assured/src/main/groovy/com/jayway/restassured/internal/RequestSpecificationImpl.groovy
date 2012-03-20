@@ -55,6 +55,8 @@ import static org.apache.http.client.params.ClientPNames.*
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE
 import static org.apache.http.entity.mime.HttpMultipartMode.BROWSER_COMPATIBLE
 
+import org.apache.http.impl.conn.ProxySelectorRoutePlanner
+
 class RequestSpecificationImpl implements FilterableRequestSpecification {
   private static final int DEFAULT_HTTPS_PORT = 443
   private static final int DEFAULT_HTTP_PORT = 80
@@ -703,6 +705,12 @@ class RequestSpecificationImpl implements FilterableRequestSpecification {
       }
     };
 
+    // make client aware of JRE proxy settings http://freeside.co/betamax/
+    http.client.routePlanner = new ProxySelectorRoutePlanner(
+        http.client.connectionManager.schemeRegistry,
+        ProxySelector.default
+    )
+    
     applyRestAssuredConfig(http)
     registerRestAssuredEncoders(http);
     RestAssuredParserRegistry.responseSpecification = responseSpecification
