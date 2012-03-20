@@ -66,6 +66,10 @@ Change log 1.6 (2012-02-18)
 * Added method getCompleteRequestPath to com.jayway.restassured.filter.FilterContext. This method provides the fully-qualified URL including scheme and port number to the request path.
 * Fixed content encoding for content types ending with +xml, +json and +html to automatically be encoded using the correct encoder methods (issue 160).
 
+Change log 1.5.0.1
+-------------------
+* Proxy settings for HTTP connections are taken from the standard JRE properties http.proxyHost and http.proxyPort
+
 Change log 1.5 (2011-12-20)
 ---------------------------
 * Added methods "noFilters" and "noFiltersOfType" to RequestSpecification to allow for removal of filters. This is useful when specifying a default filter statically (e.g. a custom authentication filter) but you need to remove it in a Filter implementation in order to make requests without this filter.
